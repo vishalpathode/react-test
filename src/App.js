@@ -23,6 +23,14 @@ import Form from './components/Form';
 import LifeCycleA from './components/LifeCycleA';
 import LifeCycleUpdateA from './components/LifeCycleUpdateA';
 import FragmentDiv from './components/FragmentDiv';
+import RefsDemo from './components/RefsDemo';
+import PortalsDemo from './components/PortalsDemo';
+import ErrorBoundryComponent from './components/ErrorBoundryComponent';
+import ErrorBoundary from './components/ErrorBoundary';
+import ContextComponentA from './components/ContextComponentA';
+import { PropsProvider } from './components/ContextComponentCreate';
+import AxiosHttpGet from './components/AxiosHttpGet';
+import AxiosHttpPost from './components/AxiosHttpPost'
 
 function App() {
   return (
@@ -54,6 +62,36 @@ function App() {
       <LifeCycleA></LifeCycleA>
       <LifeCycleUpdateA></LifeCycleUpdateA>
       <FragmentDiv></FragmentDiv>
+      <RefsDemo></RefsDemo>
+      <PortalsDemo></PortalsDemo>
+
+      {/* if you want to show error ui page(error.html/js) or something else after getting error on a component 
+        then use ErrorBoundary, it will not give coding error on ui.
+        But in dev it will show you code error, but in production it will use fall back function/ui
+        according to your code.
+        In dev, if you want t see fall back function/ui then close the error code page, you will see
+        it just on top right of the error code page of browser.
+        You must separate each component with Error Boundary, else the other component which are
+        under Error Boundary will be replaced by fall back function/ui.
+        */
+      }
+      <ErrorBoundary>
+        <ErrorBoundryComponent name='vish'></ErrorBoundryComponent>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ErrorBoundryComponent name='vishpath'></ErrorBoundryComponent>
+      </ErrorBoundary>
+
+      {/* we want to pass prop directly to  ContextComponentC, 
+      bcz ContextComponentA and ContextComponentB don't need this prop 
+      Now this 'value' will be accessible from ContextComponentA and its child components 
+      */}
+      <PropsProvider value='vishal'>
+        <ContextComponentA></ContextComponentA>
+      </PropsProvider>
+
+      <AxiosHttpGet></AxiosHttpGet>
+      <AxiosHttpPost></AxiosHttpPost>
       <br></br>
     </div>
   );
